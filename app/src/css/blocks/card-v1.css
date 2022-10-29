@@ -1,0 +1,427 @@
+:root {
+    --background-color: black;
+    --text-color: wheat;
+    --box-shadow-color: rgba(0, 0, 0, 0.717);
+}
+
+body {
+    background-color: rgba(2, 9, 43, 0.801);
+    margin: 0;
+    padding: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, 280px);
+    grid-gap: 2em;
+    justify-content: center;
+    perspective: 1000px;
+    transform-style: preserve-3d;
+    align-content: space-around;
+
+}
+
+.card-container {
+    position: relative;
+    width: 280px;
+    height: 400px;
+    transition-duration: 1s;
+    transform-style: preserve-3d;
+}
+
+.card-front {
+    position: absolute;
+    inset: 0px;
+    box-sizing: border-box;
+    color: var(--text-color);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1em;
+    transform: rotateY(0deg) translateZ(20px);
+    transform-style: preserve-3d;
+    perspective: 1000px;
+}
+
+.card-back {
+    position: absolute;
+    inset: 0;
+    transform: rotateY(180deg) translateZ(0px);
+    transform-style: preserve-3d;
+    perspective: 1000px;
+    box-sizing: border-box;
+    color: var(--text-color);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    text-align: center;
+    padding: 1em;
+}
+
+.card-front::before {
+    content: "";
+    position: absolute;
+    inset: -2px;
+    background-color: var(--background-color);
+    filter: blur(5px);
+}
+
+.img {}
+
+.img img {
+    display: block;
+    height: 100%;
+    aspect-ratio: 1/1;
+    border: 1px solid rgb(255, 204, 109, 0.5);
+    border-radius: 50%;
+}
+
+.img>div {
+    height: 100%;
+    aspect-ratio: 1/1;
+    border-radius: 50%;
+    border: 1px solid rgb(255, 213, 136);
+}
+
+.name {
+    font-size: 2.5rem;
+}
+
+.name>div {}
+
+.description {
+    font-size: 1.7rem;
+}
+
+.description>p {}
+
+.btn {
+    font-size: 1.5rem;
+}
+
+.btn>span {
+    border: 1px solid rgb(255, 213, 136);
+    padding: 0.5em 1em;
+    border-radius: 0.3em;
+}
+
+.img,
+.name,
+.description,
+.btn {
+    width: 100%;
+    perspective: 1000px;
+    transform-style: preserve-3d;
+    transform: translateZ(25px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    transition: .3s;
+}
+
+.img {
+    height: 30%;
+
+}
+
+.name {
+    padding: 15% 0;
+}
+
+.description {
+    width: 100%;
+    padding: 15% 0;
+}
+
+.btn {
+    height: 15%;
+    width: 63%;
+}
+
+.card-back .description {
+    height: 85%;
+    padding: 0;
+    align-items: flex-start;
+}
+
+.name>div,
+.description>p,
+.btn>span,
+.img>div {
+    position: absolute;
+    letter-spacing: 10px;
+}
+
+.animation {
+    width: inherit;
+    height: inherit;
+    position: absolute;
+    inset: -1px;
+    overflow: hidden;
+    transform: skew(2.5deg, 2.5deg) translateZ(10px);
+    transition-duration: 0.3s;
+    box-shadow: 0 0 10px 10px var(--box-shadow-color);
+}
+
+.card-container:is(:hover) .animation {
+    transform: skew(-3.5deg, -1.5deg) translateZ(10px);
+}
+
+.animation::before {
+    content: "";
+    position: absolute;
+    inset: -70px -110px;
+    background: linear-gradient(45deg,
+            rgba(255, 0, 0, 1) 10%,
+            rgba(255, 154, 0, 1) 20%,
+            rgba(208, 222, 33, 1) 30%,
+            rgba(79, 220, 74, 1) 40%,
+            rgba(63, 218, 216, 1) 50%,
+            rgba(47, 201, 226, 1) 60%,
+            rgba(28, 127, 238, 1) 70%,
+            rgba(95, 21, 242, 1) 80%,
+            rgba(186, 12, 248, 1)90%,
+            rgba(251, 7, 217, 1) 100%,
+            rgba(255, 0, 0, 1) 110%);
+
+    animation: rotate 10s linear infinite;
+}
+
+@keyframes rotate {
+    0% {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+
+    50% {}
+
+    100% {
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
+
+.rotate {
+    transform: rotateY(180deg);
+}
+
+.card-back::before {
+    content: "";
+    position: absolute;
+    inset: -2px;
+    background-color: var(--background-color);
+    filter: blur(5px);
+    z-index: -1;
+}
+
+.card-back p {
+    font-size: 1.5rem;
+    padding: 0;
+    margin: 0;
+}
+
+.card-back a {
+    margin: 0;
+}
+
+.name div:nth-child(1),
+.description p:nth-child(1),
+.btn span:nth-child(1),
+.img span:nth-child(1) {
+    transform: translateZ(-0.25px);
+}
+
+.name div:nth-child(2),
+.description p:nth-child(2),
+.btn span:nth-child(2),
+.img div:nth-child(2) {
+    transform: translateZ(-0.5px);
+}
+
+.name div:nth-child(3),
+.description p:nth-child(3),
+.btn span:nth-child(3),
+.img div:nth-child(3) {
+    transform: translateZ(-0.75px);
+}
+
+.name div:nth-child(4),
+.description p:nth-child(4),
+.btn span:nth-child(4),
+.img div:nth-child(4) {
+    transform: translateZ(-1px);
+}
+
+.name div:nth-child(5),
+.description p:nth-child(5),
+.btn span:nth-child(5),
+.img div:nth-child(5) {
+    transform: translateZ(-1.25px);
+}
+
+.name div:nth-child(6),
+.description p:nth-child(6),
+.btn span:nth-child(6),
+.img div:nth-child(6) {
+    transform: translateZ(-1.5px);
+}
+
+.name div:nth-child(7),
+.description p:nth-child(7),
+.btn span:nth-child(7),
+.img div:nth-child(7) {
+    transform: translateZ(-1.75px);
+}
+
+.name div:nth-child(8),
+.description p:nth-child(8),
+.btn span:nth-child(8),
+.img div:nth-child(8) {
+    transform: translateZ(-2px);
+}
+
+.name div:nth-child(9),
+.description p:nth-child(9),
+.btn span:nth-child(9),
+.img div:nth-child(9) {
+    transform: translateZ(-2.25px);
+}
+
+.name div:nth-child(10),
+.description p:nth-child(10),
+.btn span:nth-child(10),
+.img div:nth-child(10) {
+    transform: translateZ(-2.5px);
+}
+
+.name div:nth-child(11),
+.description p:nth-child(11),
+.btn span:nth-child(11),
+.img div:nth-child(11) {
+    transform: translateZ(-2.75px);
+}
+
+.name div:nth-child(12),
+.description p:nth-child(12),
+.btn span:nth-child(12),
+.img div:nth-child(12) {
+    transform: translateZ(-3px);
+}
+
+.name div:nth-child(13),
+.description p:nth-child(13),
+.btn span:nth-child(13),
+.img div:nth-child(13) {
+    transform: translateZ(-3.25px);
+}
+
+.name div:nth-child(14),
+.description p:nth-child(14),
+.btn span:nth-child(14),
+.img div:nth-child(14) {
+    transform: translateZ(-3.5px);
+}
+
+.name div:nth-child(15),
+.description p:nth-child(15),
+.btn span:nth-child(15),
+.img div:nth-child(15) {
+    transform: translateZ(-3.75px);
+}
+
+.name div:nth-child(16),
+.description p:nth-child(16),
+.btn span:nth-child(16),
+.img div:nth-child(16) {
+    transform: translateZ(-4px);
+}
+
+.name div:nth-child(17),
+.description p:nth-child(17),
+.btn span:nth-child(17),
+.img div:nth-child(17) {
+    transform: translateZ(-4.25px);
+}
+
+.name div:nth-child(18),
+.description p:nth-child(18),
+.btn span:nth-child(18),
+.img div:nth-child(18) {
+    transform: translateZ(-4.5px);
+}
+
+.name div:nth-child(19),
+.description p:nth-child(19),
+.btn span:nth-child(19),
+.img div:nth-child(19) {
+    transform: translateZ(-4.75px);
+}
+
+.name div:nth-child(20),
+.description p:nth-child(20),
+.btn span:nth-child(20),
+.img div:nth-child(20) {
+    transform: translateZ(-5px);
+}
+
+.name div:nth-child(21),
+.description p:nth-child(21),
+.btn span:nth-child(21),
+.img div:nth-child(21) {
+    transition: .3s;
+    transform: translateZ(-15px);
+    filter: blur(4px);
+}
+
+
+
+@supports (-webkit-text-stroke:1px rgba(255, 178, 34, 0.3)) {
+
+    .name>div,
+    .description>p,
+    .btn>span,
+    .img>div {
+        -webkit-text-stroke: 1px rgba(255, 178, 34, 0.3);
+        -webkit-text-fill-color: wheat;
+    }
+
+    .name div:nth-child(1),
+    .description p:nth-child(1),
+    .btn span:nth-child(1),
+    .img div:nth-child(1) {
+        -webkit-text-stroke: 0.1px rgb(0, 0, 0);
+        -webkit-text-fill-color: wheat;
+    }
+
+    .name div:nth-child(2),
+    .description p:nth-child(2),
+    .btn span:nth-child(2),
+    .img div:nth-child(2) {
+        -webkit-text-stroke: 1px rgb(0, 0, 0);
+        -webkit-text-fill-color: black;
+    }
+
+    .name div:nth-child(3),
+    .description p:nth-child(3),
+    .btn span:nth-child(3),
+    .img div:nth-child(3) {
+        -webkit-text-stroke: 1px rgb(0, 0, 0);
+        -webkit-text-fill-color: black;
+    }
+}
+
+.btn:hover {
+    transform: translateX(1px) translateY(1px) translateZ(30px);
+}
+
+.btn:active {
+    transform: translateX(-1px) translateY(-1px) translateZ(20px);
+}
